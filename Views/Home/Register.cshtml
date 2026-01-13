@@ -1,0 +1,162 @@
+﻿@model SkillConnect.Models.User
+@{
+    ViewData["Title"] = "Create Your Account";
+}
+
+<div class="artistic-bg-container">
+    <img src="/images/exceptrea-gamerroom-1-revisioned-0.gif" alt="background" class="bg-gif" />
+    <div class="bg-overlay"></div>
+</div>
+
+<div class="container py-5 content-wrapper">
+    <div class="row justify-content-center align-items-center" style="min-height: 80vh;">
+        <div class="col-md-6 col-lg-5">
+            <div class="card p-4 border-0 shadow-lg register-glass-card animate-fade-in">
+                <div class="card-body">
+                    <div class="text-center mb-4">
+                        <div class="palette-icon mb-3">
+                            <i class="fas fa-palette fa-2x text-white"></i>
+                        </div>
+                        <h2 class="card-title display-6 fw-bold text-white">Join SkillConnect</h2>
+                        <p class="text-light-50">Paint your own career path with us!</p>
+                    </div>
+                    
+                    @if (ViewBag.Error != null)
+                    {
+                        <div class="alert alert-danger rounded-pill py-2 small text-center" role="alert">
+                            <i class="fas fa-paint-brush me-2"></i> @ViewBag.Error
+                        </div>
+                    }
+
+                    <form asp-controller="Home" asp-action="Register" method="post">
+                        <div class="mb-3">
+                            <label asp-for="FullName" class="form-label fw-bold text-white small"><i class="fas fa-signature me-2 text-warning"></i> FULL NAME</label>
+                            <input asp-for="FullName" class="form-control artistic-input" placeholder="Your Full Name" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label fw-bold text-white small"><i class="fas fa-at me-2 text-info"></i> EMAIL ADDRESS</label>
+                            <input asp-for="Email" type="email" class="form-control artistic-input" placeholder="your.email@site.com" required />
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Password" class="form-label fw-bold text-white small"><i class="fas fa-lock me-2 text-danger"></i> SECURE PASSWORD</label>
+                            <input asp-for="Password" type="password" class="form-control artistic-input" placeholder="••••••••" required />
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="EducationLevel" class="form-label fw-bold text-white small"><i class="fas fa-user-graduate me-2 text-success"></i> EDUCATION LEVEL</label>
+                            <select asp-for="EducationLevel" class="form-select artistic-input" required>
+                                <option value="" class="text-dark">Select education...</option>
+                                <option value="High School" class="text-dark">High School</option>
+                                <option value="Bachelors" class="text-dark">Bachelors Degree</option>
+                                <option value="Masters" class="text-dark">Masters Degree or Higher</option>
+                                <option value="None" class="text-dark">Currently Studying / Other</option>
+                            </select>
+                        </div>
+
+                        <button type="submit" class="btn btn-warning btn-lg w-100 py-3 rounded-pill fw-bold creative-btn">
+                            <i class="fas fa-arrow-circle-right me-2"></i> START YOUR JOURNEY
+                        </button>
+                    </form>
+
+                    <p class="text-center mt-4 mb-0 text-white small">
+                        Already a member? <a asp-controller="Home" asp-action="Login" class="fw-bold text-warning transition-all">Sign In Here</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* FIX FOR THE YELLOW LINE AREA: Full Coverage */
+    .artistic-bg-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -2;
+        overflow: hidden;
+    }
+
+    .bg-gif {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ensures the GIF fills the area without stretching */
+    }
+
+    .bg-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(10, 10, 30, 0.45); /* Subtle dark tint for readability */
+        z-index: -1;
+    }
+
+    .content-wrapper {
+        position: relative;
+        z-index: 10;
+    }
+
+    /* CARD STYLING */
+    .register-glass-card {
+        background: rgba(255, 255, 255, 0.12) !important;
+        backdrop-filter: blur(25px);
+        -webkit-backdrop-filter: blur(25px);
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        border-radius: 30px !important;
+    }
+
+    .animate-fade-in {
+        animation: fadeInCard 0.8s ease-out forwards;
+    }
+
+    @@keyframes fadeInCard {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* INPUTS & BUTTONS */
+    .artistic-input {
+        background: rgba(0, 0, 0, 0.4) !important;
+        border: 1px solid rgba(255, 255, 255, 0.2) !important;
+        color: white !important;
+        border-radius: 12px !important;
+    }
+
+    .artistic-input:focus {
+        border-color: #ffc107 !important;
+        box-shadow: 0 0 15px rgba(255, 193, 7, 0.4) !important;
+    }
+
+    .palette-icon {
+        width: 70px; height: 70px;
+        background: linear-gradient(45deg, #ffc107, #ff5722);
+        border-radius: 20px;
+        display: inline-flex; align-items: center; justify-content: center;
+        animation: swing 4s ease-in-out infinite;
+    }
+
+    .creative-btn {
+        background: linear-gradient(45deg, #ffc107, #ff9800);
+        border: none;
+        color: #1a1a2e !important;
+        transition: transform 0.3s ease;
+    }
+
+    .creative-btn:hover {
+        transform: scale(1.04);
+        box-shadow: 0 8px 25px rgba(255, 193, 7, 0.5) !important;
+    }
+
+    .text-light-50 { color: rgba(255, 255, 255, 0.7); }
+
+    @@keyframes swing {
+        0%, 100% { transform: rotate(-8deg); }
+        50% { transform: rotate(8deg); }
+    }
+</style>

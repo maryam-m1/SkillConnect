@@ -1,0 +1,15 @@
+﻿@model SkillConnect.Models.QuizQuestionModel
+@* This Partial View handles the rendering of a single question, making the quiz clean and structured. *@
+
+<div class="form-group row mb-3 align-items-center border-bottom pb-3">
+    <label for="q@(Model.Id)" class="col-sm-6 col-form-label text-dark">
+        Q@(Model.Id). @Model.Label
+    </label>
+    <div class="col-sm-6 d-flex align-items-center">
+        <span class="range-label me-3 text-danger">Low (1)</span>
+        <input type="range" class="form-range" min="1" max="5" id="q@(Model.Id)" name="q@(Model.Id)" value="3" 
+               oninput="document.getElementById('q@(Model.Id)_val').innerText = this.value">
+        <span class="range-label ms-3 text-success">High (5)</span>
+        <span class="badge bg-@(Model.Color) ms-3 fs-6" id="q@(Model.Id)_val" style="min-width: 30px;">3</span>
+    </div>
+</div>

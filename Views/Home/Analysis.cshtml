@@ -1,0 +1,144 @@
+﻿<div class="analysis-page-wrapper" id="pageWrapper">
+    <div class="background-fixed-layer">
+        <div class="background-image-container" id="bgContainer"></div>
+        <div class="background-overlay"></div>
+    </div>
+
+    <div class="background-icons">
+        <div class="bg-icon icon1"><i class="fas fa-brain"></i></div>
+        <div class="bg-icon icon2"><i class="fas fa-lightbulb"></i></div>
+        <div class="bg-icon icon3"><i class="fas fa-database"></i></div>
+        <div class="bg-icon icon4"><i class="fas fa-code"></i></div>
+        <div class="bg-icon icon5"><i class="fas fa-comments"></i></div>
+        <div class="bg-icon icon6"><i class="fas fa-users"></i></div>
+    </div>
+
+    <div class="container content-lift animate__animated animate__fadeIn">
+        <div class="glass-panel dynamic-gaming-box p-4 p-md-5 rounded-5 shadow-lg border-0 main-content-box">
+            <div class="inner-puzzle-overlay"></div>
+            
+            <div class="row align-items-start position-relative" style="z-index: 5;">
+                <div class="col-lg-8">
+                    <h1 class="display-4 fw-bold text-gradient mb-3">The 6 Dimensions of Talent</h1>
+                    <p class="lead mb-5 text-white opacity-90">
+                        Our algorithm analyzes your mind across six key vectors used in our 
+                        <strong class="text-warning">Euclidean Matching Engine.</strong>
+                    </p>
+                    
+                    @await Component.InvokeAsync("Dimensions")
+                    
+                    <a href="/" class="btn btn-gaming mt-4 rounded-pill px-4 py-3">
+                        <i class="fas fa-arrow-left me-2"></i> Back to Journey
+                    </a>
+                </div>
+                
+                <div class="col-lg-4 text-center mt-4 mt-lg-0">
+                    <div class="image-gaming-frame">
+                        <img src="/images/Brain Science.jpeg" class="img-fluid rounded-4 shadow-lg floating-img" alt="Brain Analysis">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* 1. LAYOUT HEADER FIX */
+    header, nav {
+        position: relative;
+        z-index: 9999 !important;
+    }
+
+    /* 2. PAGE WRAPPER */
+    .analysis-page-wrapper {
+        position: relative;
+        min-height: 100vh;
+        padding-top: 40px;
+        padding-bottom: 40px;
+        background: transparent !important;
+        z-index: 1;
+        display: flex;
+        align-items: center;
+    }
+
+    /* 3. MAIN BOX POSITIONING */
+    .main-content-box {
+        margin-top: -20px;
+        position: relative;
+        z-index: 5;
+    }
+
+    /* 4. PINNED BACKGROUND */
+    .background-fixed-layer {
+        position: fixed;
+        top: 0; left: 0; width: 100%; height: 100%;
+        z-index: -10;
+    }
+
+    .background-image-container {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background-image: url('/images/brn.jpeg');
+        background-size: cover;
+        background-position: center;
+        filter: brightness(0.8) saturate(1.2);
+    }
+
+    .background-overlay {
+        position: absolute;
+        top: 0; left: 0; width: 100%; height: 100%;
+        background: rgba(18, 18, 18, 0.6);
+    }
+
+    /* 5. GLASS DESIGN */
+    .dynamic-gaming-box {
+        background: rgba(0, 0, 0, 0.6) !important;
+        backdrop-filter: blur(15px);
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .dimension-card {
+        height: 120px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .analytical-card .dimension-color-overlay { background: #4dabf7; position: absolute; top:0; left:0; width:100%; height:100%; }
+    .creative-card .dimension-color-overlay { background: #be4bdb; position: absolute; top:0; left:0; width:100%; height:100%; }
+    .data-card .dimension-color-overlay { background: #38d9a9; position: absolute; top:0; left:0; width:100%; height:100%; }
+    .programming-card .dimension-color-overlay { background: #ff922b; position: absolute; top:0; left:0; width:100%; height:100%; }
+    .communication-card .dimension-color-overlay { background: #ff6b6b; position: absolute; top:0; left:0; width:100%; height:100%; }
+    .people-card .dimension-color-overlay { background: #15aabf; position: absolute; top:0; left:0; width:100%; height:100%; }
+
+    .dimension-title, .dimension-description, .dimension-card i {
+        color: #000 !important;
+        position: relative;
+        z-index: 5;
+    }
+
+    .text-gradient {
+        background: linear-gradient(90deg, #ff6b6b, #4ecdc4, #feca57);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .btn-gaming {
+        background: linear-gradient(135deg, #ff6b6b 0%, #4ecdc4 100%);
+        color: white; border: none; font-weight: 700;
+    }
+
+    .floating-img { 
+        animation: floatImg 6s ease-in-out infinite;
+    }
+
+    /* FIXED: Using double @@ to avoid Razor error */
+    @@keyframes floatImg {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-15px); }
+    }
+
+    .bg-icon { position: absolute; font-size: 7rem; opacity: 0.08; color: white; }
+    .icon1 { top: 5%; left: 5%; } .icon2 { top: 15%; right: 10%; }
+</style>

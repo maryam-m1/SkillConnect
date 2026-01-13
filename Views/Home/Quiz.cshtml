@@ -1,0 +1,121 @@
+﻿@* Views/Home/Quiz.cshtml - THE DYNAMIC, IMAGE-BASED QUIZ VIEW *@
+@{
+    ViewData["Title"] = "Advanced Career Alignment";
+}
+
+<style>
+    /* Background setup - Fixed so it doesn't move when scrolling */
+    body {
+        background-image: url('/images/1196354-3840x2160-desktop-4k-geometry-background-image.jpg');
+        background-size: cover;
+        background-position: center;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+    }
+
+    /* Custom styles for the interactive quiz */
+    .quiz-card {
+        border: none;
+        border-radius: 15px;
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        /* Kept slightly transparent so background is subtly visible behind the card */
+        background-color: rgba(255, 255, 255, 0.98) !important;
+    }
+    .quiz-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    .quiz-section {
+        min-height: 250px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: #f8f9fa;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 25px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    }
+    .quiz-section h4 {
+        border-bottom: 3px solid #dee2e6;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+    .form-range {
+        cursor: pointer;
+    }
+    .range-label {
+        font-weight: bold;
+        color: #6c757d;
+        min-width: 100px;
+    }
+</style>
+
+<div class="row justify-content-center">
+    <div class="col-md-10">
+        <div class="card shadow-lg p-5 quiz-card">
+            <h2 class="text-center mb-4 display-5 fw-bold text-primary">
+                <i class="fas fa-rocket fa-fw"></i> Launch Your Career Trajectory
+            </h2>
+            <p class="text-center lead text-muted">Rate your agreement with each statement from **1 (Low Skill)** to **5 (High Skill)**.</p>
+            <hr class="mb-5"/>
+
+            <form asp-action="SubmitQuiz" method="post">
+                
+                <div class="quiz-section bg-light border-start border-warning border-5">
+                    <h4 class="text-warning"><i class="fas fa-lightbulb fa-fw"></i> 1. Logical & Analytical Thinking</h4>
+                    <p class="text-muted mb-4">Focus: Structured problem solving and pattern recognition.</p>
+                    @Html.Partial("_QuizQuestion", new QuizQuestionModel { Id = 1, Label = "I enjoy breaking down complex problems into small, manageable steps.", Color = "warning" })
+                    @Html.Partial("_QuizQuestion", new QuizQuestionModel { Id = 2, Label = "I am skilled at recognizing patterns and inconsistencies in data or arguments.", Color = "warning" })
+                    @Html.Partial("_QuizQuestion", new QuizQuestionModel { Id = 3, Label = "I can remain objective and evaluate ideas without personal bias.", Color = "warning" })
+                </div>
+
+                <div class="quiz-section bg-light border-start border-danger border-5">
+                    <h4 class="text-danger"><i class="fas fa-palette fa-fw"></i> 2. Creativity and Design Aptitude</h4>
+                    <p class="text-muted mb-4">Focus: Design, aesthetics, and novel idea generation.</p>
+                    @Html.Partial("_QuizQuestion", new QuizQuestionModel { Id = 4, Label = "I pay close attention to visual aesthetics and design principles.", Color = "danger" })
+                    @Html.Partial("_QuizQuestion", new QuizQuestionModel { Id = 5, Label = "I am comfortable starting tasks with a blank canvas and generating new ideas.", Color = "danger" })
+                    @Html.Partial("_QuizQuestion", new QuizQuestionModel { Id = 6, Label = "I enjoy experimenting with different approaches rather than following standard rules.", Color = "danger" })
+                </div>
+
+                <div class="quiz-section bg-light border-start border-success border-5">
+                    <h4 class="text-success"><i class="fas fa-chart-bar fa-fw"></i> 3. Data Interpretation and Accuracy</h4>
+                    <p class="text-muted mb-4">Focus: Working with numbers, details, and statistics.</p>
+                    @Html.Partial("_QuizQuestion", new QuizQuestionModel { Id = 7, Label = "I find it easy to work with spreadsheets, charts, and numerical data.", Color = "success" })
+                    @Html.Partial("_QuizQuestion", new QuizQuestionModel { Id = 8, Label = "I notice small errors and pay meticulous attention to details.", Color = "success" })
+                    @Html.Partial("_QuizQuestion", new QuizQuestionModel { Id = 9, Label = "I have a good understanding of basic statistical concepts (e.g., averages, trends).", Color = "success" })
+                </div>
+
+                <div class="quiz-section bg-light border-start border-secondary border-5">
+                    <h4 class="text-secondary"><i class="fas fa-code fa-fw"></i> 4. Technical and Programming Aptitude</h4>
+                    <p class="text-muted mb-4">Focus: Coding, technical documentation, and system design.</p>
+                    @Html.Partial("_QuizQuestion", new QuizQuestionModel { Id = 10, Label = "I enjoy learning new software languages or technical tools.", Color = "secondary" })
+                    @Html.Partial("_QuizQuestion", new QuizQuestionModel { Id = 11, Label = "I can read and understand technical specifications or documentation easily.", Color = "secondary" })
+                    @Html.Partial("_QuizQuestion", new QuizQuestionModel { Id = 12, Label = "I can visualize how complex, interconnected systems should be designed.", Color = "secondary" })
+                </div>
+
+                <div class="quiz-section bg-light border-start border-info border-5">
+                    <h4 class="text-info"><i class="fas fa-comments fa-fw"></i> 5. Verbal and Written Communication</h4>
+                    <p class="text-muted mb-4">Focus: Public speaking, writing clarity, and persuasion.</p>
+                    @Html.Partial("_QuizQuestion", new QuizQuestionModel { Id = 13, Label = "I am confident speaking in front of groups of people.", Color = "info" })
+                    @Html.Partial("_QuizQuestion", new QuizQuestionModel { Id = 14, Label = "I am effective at persuading others to see my point of view.", Color = "info" })
+                    @Html.Partial("_QuizQuestion", new QuizQuestionModel { Id = 15, Label = "My written explanations are typically clear, concise, and easy to follow.", Color = "info" })
+                </div>
+
+                <div class="quiz-section bg-light border-start border-primary border-5">
+                    <h4 class="text-primary"><i class="fas fa-users-cog fa-fw"></i> 6. Teamwork and Leadership Aptitude</h4>
+                    <p class="text-muted mb-4">Focus: Leadership, conflict resolution, and team coordination.</p>
+                    @Html.Partial("_QuizQuestion", new QuizQuestionModel { Id = 16, Label = "I enjoy leading projects and motivating a team towards a common goal.", Color = "primary" })
+                    @Html.Partial("_QuizQuestion", new QuizQuestionModel { Id = 17, Label = "I am good at mediating disagreements and resolving team conflicts.", Color = "primary" })
+                    @Html.Partial("_QuizQuestion", new QuizQuestionModel { Id = 18, Label = "I consider myself empathetic and a great listener to others' concerns.", Color = "primary" })
+                </div>
+
+                <div class="text-center mt-5">
+                    <button type="submit" class="btn btn-primary btn-lg px-5 shadow-lg zoom-effect">
+                        <i class="fas fa-bullseye"></i> Calculate My Destiny
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,164 @@
+﻿@* Views/Home/Results.cshtml - Corrected Layering *@
+@{
+    Layout = "_Layout"; 
+    
+    string recommendedCareer = ViewBag.Career ?? "Unknown";
+    int analytical = ViewBag.Analytical ?? 0;
+    int creative = ViewBag.Creative ?? 0;
+    int data = ViewBag.Data ?? 0;
+    int programming = ViewBag.Programming ?? 0;
+    int communication = ViewBag.Communication ?? 0;
+    int people = ViewBag.People ?? 0;
+
+    string gradientStyle = "background-image: linear-gradient(135deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.2) 100%), url('/images/annc.jpeg'); background-size: cover; background-position: center;";
+}
+
+<style>
+    .results-bg-wrapper {
+        background-image: url('/images/result.jpeg');
+        background-size: cover;
+        background-position: center center;
+        background-attachment: scroll;
+        
+        width: 100vw;
+        position: relative;
+        left: 50%;
+        right: 50%;
+        margin-left: -50vw;
+        margin-right: -50vw;
+        
+        /* Pulls image UP and DOWN */
+        margin-top: -60px;     
+        margin-bottom: -80px;  
+        
+        /* Padding keeps content from hitting the header/footer bars */
+        padding-top: 120px; 
+        padding-bottom: 120px; 
+        
+        min-height: 100vh;
+
+        /* --- THE CRITICAL FIX --- */
+        z-index: -1; /* Pushes the wallpaper BEHIND the layout header/footer */
+    }
+
+    /* Rest of your styles remain identical */
+    .text-super-bold {
+        font-weight: 950 !important;
+        letter-spacing: -1px;
+        color: #ffffff;
+        text-shadow: 4px 4px 0px #000000, 0 0 25px rgba(0,0,0,0.5);
+    }
+
+    .label-bold-dark {
+        font-weight: 900 !important;
+        color: #000000 !important;
+        text-transform: uppercase;
+        text-shadow: 1px 1px 10px rgba(255, 255, 255, 0.8);
+    }
+
+    .career-card { 
+        border-radius: 25px; 
+        border: 4px solid #000;
+        box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+        overflow: hidden;
+    }
+
+    .skill-dashboard { 
+        border-radius: 20px; 
+        background-color: #ffffff; 
+        padding: 40px; 
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5); 
+        border: 3px solid #000;
+    }
+
+    .progress-bar-labeled { 
+        font-weight: 950; 
+        font-size: 1.3rem;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.9); 
+    }
+
+    .btn-bold {
+        background: #000;
+        color: #fff;
+        font-weight: 950;
+        padding: 15px 45px;
+        border-radius: 50px;
+        border: 3px solid #fff;
+        text-transform: uppercase;
+    }
+
+    .neon-black-title {
+        color: #000000 !important;
+        font-weight: 950 !important;
+        text-shadow: 0 0 10px #00ffff, 0 0 20px #0080ff, 2px 2px 2px rgba(0,0,0,0.5);
+    }
+</style>
+
+<div class="results-bg-wrapper">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-lg-10 col-xl-8">
+                
+                <h1 class="display-2 text-center mb-5 animate__animated animate__fadeInDown neon-black-title">
+                    <i class="fas fa-trophy text-warning me-3"></i> Career Results 
+                </h1>
+
+                <div class="card career-card mb-5 animate__animated animate__zoomIn" style="@gradientStyle">
+                    <div class="card-body p-5 text-center">
+                        <p class="label-bold-dark mb-2 fs-4">Identification Complete:</p>
+                        <h2 class="display-1 text-super-bold mb-4">@recommendedCareer</h2>
+                        <p class="lead fw-900 text-white mb-4" style="text-shadow: 2px 2px 10px #000; font-size: 1.5rem;">
+                            Matching cognitive vectors confirmed.
+                        </p>
+                        <a asp-controller="Home" asp-action="Quiz" class="btn btn-bold">RETAKE ASSESSMENT</a>
+                    </div>
+                </div>
+
+                <div class="card skill-dashboard animate__animated animate__fadeInUp">
+                    <div class="card-body">
+                        <h2 class="mb-5 fw-950 text-dark text-center text-uppercase border-bottom border-dark pb-3">Neural Profile</h2>
+                        <div class="row">
+                            <div class="col-md-6 mb-4">
+                                <label class="label-bold-dark d-block mb-1">Analytical Thinking</label>
+                                <div class="progress" style="height: 38px; border-radius: 12px; border: 3px solid #000;">
+                                    <div class="progress-bar progress-bar-labeled bg-primary" style="width: @(analytical * 20)%;">@analytical</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label class="label-bold-dark d-block mb-1">Creative / Design</label>
+                                <div class="progress" style="height: 38px; border-radius: 12px; border: 3px solid #000;">
+                                    <div class="progress-bar progress-bar-labeled bg-danger" style="width: @(creative * 20)%;">@creative</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label class="label-bold-dark d-block mb-1">Data Analysis</label>
+                                <div class="progress" style="height: 38px; border-radius: 12px; border: 3px solid #000;">
+                                    <div class="progress-bar progress-bar-labeled bg-success" style="width: @(data * 20)%;">@data</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label class="label-bold-dark d-block mb-1">Programming</label>
+                                <div class="progress" style="height: 38px; border-radius: 12px; border: 3px solid #000;">
+                                    <div class="progress-bar progress-bar-labeled bg-warning text-dark" style="width: @(programming * 20)%;">@programming</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label class="label-bold-dark d-block mb-1">Communication</label>
+                                <div class="progress" style="height: 38px; border-radius: 12px; border: 3px solid #000;">
+                                    <div class="progress-bar progress-bar-labeled bg-info text-dark" style="width: @(communication * 20)%;">@communication</div>
+                                </div>
+                            </div>
+                            <div class="col-md-6 mb-4">
+                                <label class="label-bold-dark d-block mb-1">Management</label>
+                                <div class="progress" style="height: 38px; border-radius: 12px; border: 3px solid #000;">
+                                    <div class="progress-bar progress-bar-labeled bg-secondary" style="width: @(people * 20)%;">@people</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

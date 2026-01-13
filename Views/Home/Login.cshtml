@@ -1,0 +1,150 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+
+<div class="login-bg-container">
+    <img src="/images/223e6792880429.5e569ff84ebef.gif" alt="background" class="login-bg-gif" />
+    <div class="login-bg-overlay"></div>
+</div>
+
+<div class="container py-5 content-overlay">
+    <div class="row justify-content-center align-items-center" style="min-height: 85vh;">
+        <div class="col-md-5">
+            <div class="card border-0 shadow-2xl p-4 rounded-5 login-glass-card animate-fade-in">
+                <div class="text-center mb-4">
+                    <div class="game-icon-pulse mb-3">
+                        <i class="fas fa-brain fa-2x text-white"></i>
+                    </div>
+                    <h2 class="fw-bold text-white">Level Up Your Career</h2>
+                    <p class="text-light-50">Sign in to continue your skill assessment game.</p>
+                </div>
+
+                @if (ViewBag.Error != null)
+                {
+                    <div class="alert alert-danger rounded-pill py-2 small text-center">
+                        <i class="fas fa-ghost me-2"></i> @ViewBag.Error
+                    </div>
+                }
+
+                <form asp-action="Login" method="post">
+                    <div class="mb-3">
+                        <label class="form-label fw-bold text-white ms-2 small">USER EMAIL</label>
+                        <div class="input-group">
+                            <span class="input-group-text border-0 bg-dark-transparent rounded-start-pill">
+                                <i class="fas fa-user-astronaut text-info"></i>
+                            </span>
+                            <input type="email" name="email" class="form-control border-0 bg-dark-transparent text-white rounded-end-pill py-2" placeholder="player@example.com" required />
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label class="form-label fw-bold text-white ms-2 small">PASSWORD</label>
+                        <div class="input-group">
+                            <span class="input-group-text border-0 bg-dark-transparent rounded-start-pill">
+                                <i class="fas fa-fingerprint text-info"></i>
+                            </span>
+                            <input type="password" name="password" class="form-control border-0 bg-dark-transparent text-white rounded-end-pill py-2" placeholder="••••••••" required />
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-info w-100 py-3 rounded-pill fw-bold text-white shadow login-btn">
+                        START Quiz <i class="fas fa-play-circle ms-2"></i>
+                    </button>
+                </form>
+
+                <div class="text-center mt-4">
+                    <p class="mb-0 text-light-50 small">Need a new character?</p>
+                    <a asp-action="Register" class="text-info fw-bold text-decoration-none transition-all hover-glow">Create Account →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    /* FULL AREA COVERAGE (Yellow Line Fix) */
+    .login-bg-container {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -2;
+        overflow: hidden;
+    }
+
+    .login-bg-gif {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* Ensures GIF covers the entire screen area */
+    }
+
+    .login-bg-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.4); /* Darker overlay for better text contrast */
+        z-index: -1;
+    }
+
+    .content-overlay {
+        position: relative;
+        z-index: 10;
+    }
+
+    /* GLASS CARD ENHANCEMENTS */
+    .login-glass-card {
+        background: rgba(255, 255, 255, 0.08) !important;
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.15) !important;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5) !important;
+    }
+
+    .bg-dark-transparent {
+        background: rgba(0, 0, 0, 0.4) !important;
+    }
+
+    .form-control::placeholder { color: rgba(255,255,255,0.4); }
+    .text-light-50 { color: rgba(255,255,255,0.6); }
+
+    /* ANIMATIONS */
+    .animate-fade-in {
+        animation: cardEntrance 0.8s ease-out forwards;
+    }
+
+    @@keyframes cardEntrance {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .game-icon-pulse {
+        width: 65px; height: 65px;
+        background: linear-gradient(45deg, #0dcaf0, #6610f2);
+        border-radius: 50%;
+        display: inline-flex; align-items: center; justify-content: center;
+        animation: pulseIcon 2s infinite;
+    }
+
+    @@keyframes pulseIcon {
+        0% { transform: scale(1); box-shadow: 0 0 0px rgba(13, 202, 240, 0.7); }
+        70% { transform: scale(1.1); box-shadow: 0 0 20px rgba(13, 202, 240, 0); }
+        100% { transform: scale(1); box-shadow: 0 0 0px rgba(13, 202, 240, 0); }
+    }
+
+    .login-btn {
+        background: linear-gradient(45deg, #0dcaf0, #007bff);
+        border: none;
+        transition: all 0.3s ease;
+    }
+
+    .login-btn:hover {
+        transform: scale(1.03);
+        box-shadow: 0 10px 25px rgba(13, 202, 240, 0.5) !important;
+        filter: brightness(1.1);
+    }
+
+    .hover-glow:hover {
+        text-shadow: 0 0 10px rgba(13, 202, 240, 0.8);
+    }
+</style>
